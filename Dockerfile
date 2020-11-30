@@ -12,9 +12,7 @@ FROM openjdk:8 AS javabuild
 
 WORKDIR /root
 
-COPY --from=pybuild /root/ .
-
-RUN chmod 777 ./server/server.jar
+COPY --from=pybuild /root .
 
 # checkeula.sh runs the server once to create the 
 # eula if it does not exist, and then accepts
@@ -29,6 +27,6 @@ EXPOSE $PORT
 RUN ./setport.sh $PORT
 
 # set the world name
-# RUN ./setworld.sh $WORLD
+RUN ./setworld.sh $WORLD
 
 CMD ["./start.sh"]
