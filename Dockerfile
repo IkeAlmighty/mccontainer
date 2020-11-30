@@ -14,6 +14,8 @@ WORKDIR /root
 
 COPY --from=pybuild /root/ .
 
+RUN chmod 777 ./server/server.jar
+
 # checkeula.sh runs the server once to create the 
 # eula if it does not exist, and then accepts
 # the eula.
