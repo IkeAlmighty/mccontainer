@@ -6,7 +6,7 @@ COPY . .
 
 # run python script to download latest server file:
 RUN ["pip", "install", "requests"]
-RUN ["python3", "getlatestjar.py"]
+RUN ["python3", "getLatestJar.py"]
 
 FROM openjdk:8 AS javabuild
 
