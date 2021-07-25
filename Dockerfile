@@ -6,7 +6,7 @@ COPY . .
 
 # run python script to download latest server file:
 RUN ["pip", "install", "requests"]
-RUN ["python3", "getLatestJar.py"]
+RUN ["python3", "getlatestjar.py"]
 
 FROM openjdk:8 AS javabuild
 
@@ -14,13 +14,8 @@ WORKDIR /root
 
 COPY --from=pybuild /root .
 
-# checkeula.sh runs the server once to create the 
-# eula if it does not exist, and then accepts
-# the eula.
-RUN ["./checkeula.sh"]
-
 # expose the port
-EXPOSE $PORT
+EXPOSE $PORT:$PORT
 
 # set the minecraft server port to the port exposed in
 # this container
