@@ -8,11 +8,15 @@ COPY . .
 RUN ["pip", "install", "requests"]
 RUN ["python3", "getLatestJar.py"]
 
-FROM openjdk:8 AS javabuild
+FROM openjdk:17 AS javabuild
+
+ARG PORT
 
 WORKDIR /root
 
 COPY --from=pybuild /root .
+
+RUN ls
 
 # expose the port
 EXPOSE $PORT:$PORT
@@ -20,8 +24,5 @@ EXPOSE $PORT:$PORT
 # set the minecraft server port to the port exposed in
 # this container
 RUN ./setport.sh $PORT
-
-# set the world name
-RUN ./setworld.sh $WORLD
 
 CMD ["./start.sh"]
